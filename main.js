@@ -45,7 +45,7 @@ function draw(t) {
     var ctx = document.getElementById('canvas').getContext('2d')
     ctx.fillStyle = 'rgba(255,255,255,0.7)'
     ctx.fillRect(0,0,400,200)
-    ctx.fillStyle = 'blue'
+    ctx.fillStyle = 'green'
     ctx.save()
 
     drawMiddleLine(ctx)
