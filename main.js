@@ -33,30 +33,30 @@ function draw(t) {
   if (game.player1Loses) {
     alert('Player 1 loses')
     return
-  } 
-  
+  }
+
   if (game.player2Loses) {
     alert('Player 2 loses')
     return
   }
-  
+
   if (prevT !== undefined) {
     var deltaT = t - prevT
     var ctx = document.getElementById('canvas').getContext('2d')
     ctx.fillStyle = 'rgba(255,255,255,0.7)'
     ctx.fillRect(0,0,400,200)
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = 'blue'
     ctx.save()
-    
+
     drawMiddleLine(ctx)
-    
+
     paddle1.updatePosition(deltaT)
     paddle1.draw(ctx)
     paddle2.updatePosition(deltaT)
     paddle2.draw(ctx)
     ball.updatePosition(deltaT)
     ball.draw(ctx)
-    
+
     ctx.restore()
   }
   prevT = t
@@ -65,13 +65,13 @@ function draw(t) {
 
 function drawMiddleLine(ctx) {
   ctx.save()
-  
+
   ctx.lineWidth = 5
   ctx.setLineDash([canvas.height/15,canvas.height/15])
   ctx.beginPath()
   ctx.moveTo(200,0)
   ctx.lineTo(200,200)
-  ctx.stroke()    
+  ctx.stroke()
 
   ctx.restore()
 }
@@ -119,15 +119,15 @@ var ball = {
   },
   checkCanvasBoundaries: function() {
     // check for boundaries
-    if (this.y + this.radius + this.vy >= canvas.height) 
+    if (this.y + this.radius + this.vy >= canvas.height)
       this.vy = -Math.abs(this.vy)
-      
-    if (this.y - this.radius + this.vy <= 0) 
+
+    if (this.y - this.radius + this.vy <= 0)
       this.vy = Math.abs(this.vy)
-    
+
     if (this.x + this.radius + this.vx >= canvas.width)
       game.player2Loses = true
-    
+
     if (this.x - this.radius + this.vx <= 0)
       game.player1Loses = true
   }
@@ -140,7 +140,7 @@ function Paddle(x, downKey, upKey) {
   this.height = 50
   this.downKey = downKey
   this.upKey = upKey
-  
+
   this.updatePosition = function(deltaT) {
     if (keys[this.downKey]) {
       this.y = Math.min(150, this.y + 0.3 * deltaT )
@@ -149,7 +149,7 @@ function Paddle(x, downKey, upKey) {
       this.y = Math.max(0, this.y - 0.3 * deltaT)
     }
   }
-  
+
   this.draw = function(ctx) {
     ctx.fillRect(this.x, this.y, this.width, this.height)
   }
